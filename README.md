@@ -1,12 +1,12 @@
 # Macedonian Sign Language Recognition (MSL)
 
-This project implements a real-time **sign language recognition system** for the **Macedonian Sign Language (MSL)** alphabet and some words. It uses **MediaPipe Holistic** for extracting pose, face, and hand landmarks, and a **stacked LSTM model** for sequence classification.  
+This project implements a real-time **sign language recognition system** for the **Macedonian Sign Language (MSL)** alphabet and some words. It uses **MediaPipe Holistic** for extracting pose, face, and hand landmarks, and **stacked LSTM-based models** for sequence classification. It also suggest the **best combination of keypoints** suitable for recognizing MSL.  
 
 The system supports:  
 - Recording raw sign language samples from webcam  
-- Extracting keypoints from face, pose, and hands  
+- Extracting keypoints from face, mouth, pose, and hands  
 - Data augmentation via transformations (translation, rotation, scaling)  
-- Training LSTM models for alphabet and word recognition  
+- Training LSTM-based models for alphabet and word recognition  
 - Real-time sign language recognition from webcam  
 
 ---
@@ -19,11 +19,22 @@ The system supports:
 
 - **Data Augmentation**  
   - Generate variations of recorded signs with translations and rotations.  
-  - Expand dataset to improve model generalization.  
+  - Expand dataset to improve model generalization.
+ 
+- **Kepoint combinations**
+  - Hand landmarks;
+  - Hand + Pose landmarks;
+  - Hand + Mouth landmarks;
+  - Hand + Face landmarks;
+  - Hand + Mouth + Pose landmarks;
+  - Hand + Face + Pose landmarks;
 
-- **Model**  
-  - Stacked **LSTM (Long Short-Term Memory)** network.  
-  - Input shape: `(30 frames, 1662 features)` (pose + face + hands).  
+- **Models**  
+  - Stacked **LSTM (Long Short-Term Memory)** network.
+  - **Bidirectional LSTM (BiLSTM)** network.
+  - **CNN-LSTM** network.
+  - Features: pose, face and hands keypoints.
+  - Input shape: `(30 frames, number of features)`.  
   - Output: classification across 31 alphabet signs or 30 words.  
 
 - **Live Recognition**  
